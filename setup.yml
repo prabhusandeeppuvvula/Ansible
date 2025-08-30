@@ -1,0 +1,43 @@
+---
+- name: Install required software for portfolio
+  hosts: portfolio_servers
+  become: yes
+
+  tasks:
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    - name: Install curl
+      apt:
+        name: curl
+        state: present
+
+    - name: Install Node.js (v20) and npm
+      shell: |
+        curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+        apt-get install -y nodejs
+      args:
+        executable: /bin/bash
+
+    - name: Verify Node.js installation
+      command: node -v
+      register: node_version
+
+    - name: Show Node.js version
+      debug:
+        msg: "{{ node_version.stdout }}"
+
+    - name: Verify npm installation
+      command: npm -v
+      register: npm_version
+
+    - name: Show npm version
+      debug:
+        msg: "{{ npm_version.stdout }}"
