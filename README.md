@@ -15,4 +15,4 @@ nano install_packages.yml
 Paste the ansible code.
 
 # Run the Playbook
-ansible-playbook -i hosts.ini install_packages.yml
+ansible-playbook install_packages.yml
