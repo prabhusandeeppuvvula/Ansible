@@ -1,6 +1,6 @@
 ---
 - name: Install required software for portfolio
-  hosts: portfolio_servers
+  hosts: all
   become: yes
 
   tasks:
